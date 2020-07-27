@@ -111,9 +111,14 @@ $windowHeight: calc(100vh - 70px);
     padding-bottom: 10px;
     margin-right: 10px;
     border-bottom: 5px solid transparent;
+    cursor: pointer;
+    user-select: none;
     &:hover {
       border-bottom: 5px solid $color2;
     }
+  }
+  .selected {
+    border-bottom: 5px solid #0d668f !important;
   }
   li {
     width: 100%;    
@@ -226,14 +231,18 @@ main {
   box-sizing: border-box;
   height: $windowHeight;
   width: 85vw;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   padding-top: 20px;
   overflow: scroll;
+  input {
+     margin-bottom: 20px;
+     outline: none;
+  }
 }
 
 .card {
-  margin: auto;
   box-sizing: border-box;
   height: calc(10vw + 100px);
   width: 80%;
@@ -242,16 +251,39 @@ main {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transition: 0.5s;
   cursor: pointer;
   h1 {
     font-weight: bold;
     color: $color3;
     font-size: 1.5em;
   }
-  .mini-profile {
+  .author {
+    display: flex;
     height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    box-shadow: 1px 1px 5px 1px black;
+    align-items: center;
+    color:$color3;
+    font-weight: bold;
+    .mini-profile {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      box-shadow: 1px 1px 5px 1px black;
+      margin-left: 10px;
+    }
   }
+  p {
+    width: 100%;
+    color: $color2;
+    font-size: 1.5em;
+  }
+  span {
+    color: $color3;
+  }
+}
+.expand {
+  height: 90vh;
 }

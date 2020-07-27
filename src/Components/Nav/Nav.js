@@ -5,6 +5,7 @@ import Login from './Login';
 
 import {connect} from 'react-redux';
 import {getUser, logoutUser} from '../../ducks/reducer';
+import {changeBool} from '../../ducks/routeReducer';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,8 +14,16 @@ const Nav = (props) => {
     const [error, setError] = useState('');
     const [toggleMenu, setToggleMenu] = useState('');
     const [loginButtons, setLoginButtons] = useState((<div className='sign-in'></div>))
+    const [selected, setSelected] = useState(1);
 
-    const {getUser, logoutUser, username, display_name} = props;
+    const {getUser, logoutUser} = props;
+    const {username, display_name} = props.reducer
+
+    useEffect(() => {
+        if (props.routeReducer.myIdeas) setSelected(2);
+        else setSelected(1);
+    }, [props.routeReducer.myIdeas])
+
     useEffect(() => {
         axios.get('/auth/quickLogin')
         .then(res => {
@@ -71,9 +80,10 @@ const Nav = (props) => {
                 <div className='nav'>
                     <nav>
                         <ul>
-                            <Link to='/ideas'><li>Ideas</li></Link>
-                            <Link to='/projects'><li>Projects</li></Link>
-                            <Link to='/'><li>Connect</li></Link>
+                            <Link className={selected === 1 ? 'selected' : ''} onClick={() => {props.changeBool(false); setSelected(1)}} to='/'><li>Ideas</li></Link>
+                            <Link className={selected === 2 ? 'selected' : ''} onClick={() => {props.changeBool(true); setSelected(2)}} to='/'><li>My Ideas</li></Link>
+                            <Link className={selected === 3 ? 'selected' : ''} onClick={() => setSelected(3)} to='/projects'><li>Projects</li></Link>
+                            <Link className={selected === 4 ? 'selected' : ''} onClick={() => setSelected(4)} to='/'><li>Connect</li></Link>
                         </ul>
                     </nav>
                     {username ? profileImg : loginButtons}
@@ -92,4 +102,4 @@ const Nav = (props) => {
 };
 
 const mapStateToProps = reduxState => reduxState;
-export default connect(mapStateToProps, {getUser, logoutUser})(Nav);
+export default connect(mapStateToProps, {getUser, logoutUser, changeBool})(Nav);
