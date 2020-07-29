@@ -197,7 +197,9 @@ $windowHeight: calc(100vh - 70px);
   background-color: $color6;
   box-shadow: 2px 7px 8px 2px black;
   min-width: 120px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .profile-display {
     box-sizing: border-box;
     padding: 5px;
@@ -212,6 +214,10 @@ $windowHeight: calc(100vh - 70px);
     background-color: lightgreen;
     display: inline-block;
     margin-right: 5px;
+  }
+  .message-section {
+    height: calc(30vh - 16px);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.445);
   }
 }
 
@@ -240,11 +246,21 @@ main {
      margin-bottom: 20px;
      outline: none;
   }
+  button {
+    outline: none;
+    border: none;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: $color6;
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .card {
   box-sizing: border-box;
-  height: calc(10vw + 100px);
+  min-height: calc(10vw + 100px);
   width: 80%;
   background: rgba(0, 0, 0, 0.247);
   border: 2px solid grey;
@@ -255,7 +271,6 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
   transition: 0.5s;
-  cursor: pointer;
   h1 {
     font-weight: bold;
     color: $color3;
@@ -283,7 +298,40 @@ main {
   span {
     color: $color3;
   }
+  .edit-buttons {
+    width: 100%;
+    button {
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      padding: 8px;
+      margin-right: 10px;
+      cursor: pointer;
+      background-color: rgb(226, 38, 38);
+      color: rgb(224, 224, 224);
+      &:hover {
+        background-color: rgb(199, 32, 32)
+      }
+    }
+  }
 }
 .expand {
-  height: 90vh;
+  min-height: 80vh;
+  input, textarea {
+    outline: none;
+  }
+  .title-input {
+    height: 25px;
+    color: $color3;
+    background: transparent;
+    border: 1px solid $color6;
+    font-size: 1.5em;
+  }
+  .description-input {
+    height: 40%;
+    color: $color2;
+    background: transparent;
+    border: 1px solid $color6;
+    font-size: 1.5em;
+  }
 }

@@ -8,6 +8,7 @@ import EditIdea from './Components/Display/EditIdea';
 export default (
     <Switch>
         <Route exact path='/' component={Landing} />
+        <Route exact path='/ideas' component={Landing} />
         <Route exact path='/projects' component={Projects} />
         <Route exact path='/ideas/:id' component={EditIdea} />
     </Switch>

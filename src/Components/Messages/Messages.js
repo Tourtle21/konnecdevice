@@ -19,12 +19,21 @@ const Messages = (props) => {
         })
     }
 
-    const mappedRequests = props.requests.map(request => (request.request_id === props.id ? <div>You requested to {request.display_name} to collaborate on {request.title} <button onClick={() => cancelRequest(request.id)}>X</button></div> : <div>{request.display_name} requested to collaborate with you on {request.title}</div>))
+    const mappedRequests = props.requests.map(request => (request.request_id === props.id ? <div>You requested to {request.display_name} to collaborate on {request.title} <button onClick={() => cancelRequest(request.id)}>X</button></div> : <div>{request.display_name}<br />{request.title}<br /><button onClick={() => cancelRequest(request.id)}>X</button><button>√</button></div>))
 
     return (
         <section className='messages'>
             <div className='profile-display'><div className='online'></div>{props.username ? props.display_name : 'Guest User'}</div>
-            {mappedRequests}
+            <div className='message-section'>
+                <h1>Requests</h1>
+                {mappedRequests}
+            </div>
+            <div className='message-section'>
+                <h1>People</h1>
+            </div>
+            <div className='message-section'>
+                <h1>Projects</h1>
+            </div>
         </section>
     )
 };

@@ -34,7 +34,10 @@ app.get('/auth/logout', authCtrl.logout);
 
 app.get('/api/ideas', ideaCtrl.getIdeas);
 app.get('/api/myIdeas', checkLoggedInCtrl.checkLoggedIn, ideaCtrl.getMyIdeas);
+app.post('/api/ideas', checkLoggedInCtrl.checkLoggedIn, ideaCtrl.createIdea);
 app.put('/api/ideas/live/:id', ideaCtrl.toggleLive);
+app.put('/api/ideas/:id', ideaCtrl.editIdea);
+app.delete('/api/ideas/:id', ideaCtrl.deleteIdea);
 
 app.get('/api/messages/all', checkLoggedInCtrl.checkLoggedIn, messagesCtrl.getRequests);
 app.post('/api/messages/requests', checkLoggedInCtrl.checkLoggedIn, messagesCtrl.addRequest);

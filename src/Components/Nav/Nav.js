@@ -81,7 +81,7 @@ const Nav = (props) => {
                     <nav>
                         <ul>
                             <Link className={selected === 1 ? 'selected' : ''} onClick={() => {props.changeBool(false); setSelected(1)}} to='/'><li>Ideas</li></Link>
-                            <Link className={selected === 2 ? 'selected' : ''} onClick={() => {props.changeBool(true); setSelected(2)}} to='/'><li>My Ideas</li></Link>
+                            <Link className={selected === 2 ? 'selected' : ''} onClick={() => {props.changeBool(true); setSelected(2)}} to='/ideas'><li>My Ideas</li></Link>
                             <Link className={selected === 3 ? 'selected' : ''} onClick={() => setSelected(3)} to='/projects'><li>Projects</li></Link>
                             <Link className={selected === 4 ? 'selected' : ''} onClick={() => setSelected(4)} to='/'><li>Connect</li></Link>
                         </ul>

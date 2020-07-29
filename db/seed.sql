@@ -36,5 +36,7 @@ insert into users (username, password, description, display_name, profile_img)
 values ('Kliden', '$2a$10$xUiVtx0XIO7Ojq2BtOsEnukwHDqxXZayBNMlMNdeCa8.jZRmwWf.O', 'Cool person with awesome hair', 'Piper', 'img');
 insert into ideas (title, description, plan, img, is_project, is_live, user_id)
 values ('Konnecd Hub', 'A little hub for connecting programmers and entreprenuers with ideas', '', '', false, false, 1);
+insert into ideas (title, description, plan, img, is_project, is_live, user_id)
+values ('Shark Tracker', 'Track sharks across the ocean to see what they eat and do', '', '', false, false, 1);
 insert into requests(request_id, recepient_id, idea_id, accepted)
 values (2, 1, 1, false);
