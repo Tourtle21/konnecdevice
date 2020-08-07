@@ -65,10 +65,10 @@ app.get('/api/users', authCtrl.getUsers);
 const router = require('./router');
 
 const server = http.createServer(app);
-const io = socketio(server);
+var io = require('socket.io')(server, {origins:'http://167.172.193.114:*'});
 
+app.use(router);
 app.use(cors());
-// io.origins(['http://167.172.193.114:3030', 'http://localhost:3000']);
 
 io.on('connection', (socket) => {
     console.log('We have a new connection!!!');

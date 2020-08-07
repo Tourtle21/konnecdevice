@@ -8,7 +8,7 @@ let socket;
 
 const GroupMessages = (props) => {
     // const  ENDPOINT = 'http://167.172.193.114:3030';
-    const  ENDPOINT = 'http://167.172.193.114:3030';
+    const  ENDPOINT = 'http://167.172.193.114:3030/';
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
