@@ -48,6 +48,7 @@ const Nav = (props) => {
     const sendEmail = (username) => {
         setLogin('confirmation');
         const randomNumber = Math.round(Math.random() * (99999 - 10000) + 10000);
+        console.log(randomNumber);
         setConfirmation(randomNumber);
         axios.post('/auth/email', {number: randomNumber, email:username});
     }
