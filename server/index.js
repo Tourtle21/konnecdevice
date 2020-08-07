@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
 })
 
 
-app.use(router);
+
 app.use(express.static(__dirname + '/../build'));
 
 app.get('*', (req, res) => {
