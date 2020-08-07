@@ -66,7 +66,8 @@ const router = require('./router');
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.origins('*:*');
+var allowedOrigins = "http://localhost:* http://167.172.193.114:*";
+io.origins(['http://1167.172.193.114:3000']);
 
 io.on('connection', (socket) => {
     console.log('We have a new connection!!!');
