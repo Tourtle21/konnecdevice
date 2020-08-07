@@ -66,6 +66,8 @@ const router = require('./router');
 const server = http.createServer(app);
 const io = socketio(server);
 
+io.origins('*:*');
+
 io.on('connection', (socket) => {
     console.log('We have a new connection!!!');
     socket.on('join', room => {
