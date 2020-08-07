@@ -4,6 +4,7 @@ const express = require('express'),
       session = require('express-session'),
       http = require('http'),
       path = require('path'),
+      cors = require('cors'),
       socketio = require('socket.io'),
       checkLoggedInCtrl = require('./controllers/checkLoggedInController'),
       authCtrl = require('./controllers/authController'),
@@ -66,7 +67,8 @@ const router = require('./router');
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.origins(['http://167.172.193.114:3030', 'http://localhost:3000']);
+app.use(cors());
+// io.origins(['http://167.172.193.114:3030', 'http://localhost:3000']);
 
 io.on('connection', (socket) => {
     console.log('We have a new connection!!!');
