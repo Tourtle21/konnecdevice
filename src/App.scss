@@ -135,7 +135,7 @@ $windowHeight: calc(100vh - 70px);
   }
   nav {
     height: 100%;
-    width: 70%;
+    width: 80%;
     max-width: 600px;
   }
   nav ul{
@@ -369,8 +369,8 @@ main {
 
 .project-card {
   box-sizing: border-box;
-  min-height: 30vw;
-  width: 30vw;
+  min-height: 150px;
+  width: 40%;
   background: rgba(0, 0, 0, 0.247);
   border: 2px solid grey;
   border-radius: 10px;
@@ -414,7 +414,7 @@ main {
       text-decoration: none;
       color: white;
       height: 100%;
-      width: 10%;
+      width: 80px;
       font-size: 0.7em;
     }
     a:nth-child(1) {
@@ -529,7 +529,7 @@ main {
   width: 100%;
   overflow-y: scroll;
   padding: 20px;
-  @include flex(space-between, flex-start);
+  @include flex(center, flex-start);
   flex-wrap: wrap;
   .task {
     height: 100%;
@@ -607,5 +607,19 @@ main {
   .plan-description {
     color: $color2;
     font-size: 0.8em;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .messages {
+    display: none;
+  }
+  main {
+    width: 100vw;
+  }
+  .project-card {
+    width: 80%;
+  }
+  .task {
+    width: 90% !important;
   }
 }

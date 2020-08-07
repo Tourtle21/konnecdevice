@@ -18,7 +18,6 @@ export default function reducer(state=initialState, action) {
     const {payload, type} = action;
     switch (type) {
         case GET_BOOL:
-            console.log(payload)
             return {...state, myIdeas: payload};
         default:
             return state;
