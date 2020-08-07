@@ -16,15 +16,12 @@ const Tasks = (props) => {
         })
         axios.get(`/auth/isAdmin/${props.match.params.id}`)
         .then(res => {
-            console.log(res.data);
             setAdmin(res.data.id);
         })
         axios.get(`/api/ideas/tasks/${props.match.params.id}`)
         .then(res => {
             let newTasks = {};
-            console.log(res.data);
             res.data.forEach(task => {
-                console.log(task)
                 if (!newTasks[task.coll_id]) newTasks[task.coll_id] = [];
                 newTasks[task.coll_id].push(task);
             })
@@ -39,7 +36,6 @@ const Tasks = (props) => {
             setTask('');
             const collId = res.data.coll_id;
             let newTasks = [];
-            console.log(tasks[collId])
             if (tasks[collId]) newTasks = tasks[collId].slice();
             newTasks.push(res.data);
             setTasks({...tasks, [collId]: newTasks});
@@ -59,7 +55,6 @@ const Tasks = (props) => {
     const toggleCompleted = (id, collId) => {
         axios.put(`/api/ideas/tasks/${id}`)
         .then(res => {
-            console.log(res.data);
             const index = tasks[collId].findIndex(task => task.id === id);
             const newTasks = tasks[collId].slice();
             newTasks[index].completed = res.data.completed;
@@ -69,7 +64,6 @@ const Tasks = (props) => {
 
     const mappedCollaborators = collaborators.map(col => {
         let mappedTasks;
-        console.log(tasks);
         if (tasks[col.id]) {
             mappedTasks = tasks[col.id].map(task => (<li className={task.completed ? 'complete' : ''}>{props.id === col.id ? <input onChange={() => toggleCompleted(task.id, col.id)} className='task-check' checked={task.completed} type='checkbox' /> : null} {task.task} {props.id === col.id ? <button onClick={() => deleteTask(task.id, col.id)} className='task-delete'>-</button> : null}</li>));
         } else  {

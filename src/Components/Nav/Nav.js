@@ -27,7 +27,6 @@ const Nav = (props) => {
     useEffect(() => {
         axios.get('/auth/quickLogin')
         .then(res => {
-            console.log(res.data);
             getUser(res.data);
         }).catch(err => {
             setLoginButtons(<div className='sign-in'><button onClick={() => setLogin('login')}>Login</button><button onClick={() => setLogin('signup')}>Sign Up</button></div>);
@@ -35,7 +34,6 @@ const Nav = (props) => {
     }, [])
 
     const handleLogin = (username, password) => {
-        console.log("HI2")
         setError('');
         axios.post('/auth/login', {username, password})
         .then(res => {
@@ -45,9 +43,7 @@ const Nav = (props) => {
             setError(err.response.data);
         })
     }
-    console.log(confirmation);
     const sendEmail = (username) => {
-        console.log(error);
         const randomNumber = Math.round(Math.random() * (99999 - 10000) + 10000);
         console.log(randomNumber);
         axios.post('/auth/email', {number: randomNumber, email:username})
@@ -55,11 +51,9 @@ const Nav = (props) => {
             setConfirmation(randomNumber);
             setLogin('confirmation');
         }).catch(() => {
-            console.log("HI")
             setError('Invalid Email');
         })
     }
-    console.log(error);
 
     const handleSignup = (username, password, displayName, description, file) => {
         axios.post('/auth/register', {username, password, displayName, description, file})

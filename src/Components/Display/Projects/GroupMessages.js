@@ -12,7 +12,6 @@ const GroupMessages = (props) => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        console.log(messages);
         axios.get(`/api/messages/${props.match.params.id}`)
         .then(res => {
             setMessages(res.data);
@@ -21,7 +20,6 @@ const GroupMessages = (props) => {
         socket.emit('join', props.match.params.id);
 
         socket.on('message', newMessage => {
-            console.log(messages, newMessage, [...messages, newMessage])
             setMessages(messages => [...messages, newMessage]);
         });
     }, []);
@@ -32,11 +30,9 @@ const GroupMessages = (props) => {
         axios.post(`/api/messages/${props.match.params.id}`, {message})
         .then(res => {
             setMessage('');
-            console.log(res.data);
             socket.emit('sendMessage', {room:props.match.params.id, message:res.data});
         }).catch(err => console.log(err));
     }
-    console.log(messages);
     const mappedMessages = messages.map(message => (<div className={`message ${message.display_name !== props.display_name ? 'my-message' : ''}`}><div className='mini-profile' style={{backgroundImage: `url(${message.profile_img})`}}></div><div className='text'><h1>{message.display_name}</h1><p>{message.message}</p></div></div>))
     return (
         <div className='group-messages'>

@@ -11,7 +11,6 @@ const Plan = (props) => {
     useEffect(() => {
         axios.get(`/api/ideas/${props.match.params.id}`)
         .then(res => {
-            console.log(res.data);
             if (res.data.plan) setFullPlan(JSON.parse(res.data.plan));
             else setFullPlan(['', '', '', '', '']);
         })
@@ -24,7 +23,6 @@ const Plan = (props) => {
     }
 
     const savePlan = () => {
-        console.log(fullPlan);
         axios.put(`/api/ideas/plan/${props.match.params.id}`, {plan:JSON.stringify(fullPlan)})
         .then(res => {
            

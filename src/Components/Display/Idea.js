@@ -29,11 +29,9 @@ const Idea = (props) => {
         changeSelectedFn(0);
     }
 
-    console.log(description.includes('\n'));
     const sendRequest = (e) => {
         axios.post('/api/messages/requests', {id, recepient_id: user_id, user_request: false})
         .then(res => {
-            console.log(res.data);
             props.updateRequests(res.data);
         })
     }

@@ -26,7 +26,6 @@ const User = (props) => {
     }
 
     const mappedIdeas = myIdeas.filter(idea => idea.is_live).map(idea => (<div onClick={() => sendRequest(idea.id)} className='connect-idea'>{idea.title}</div>))
-    console.log(description)
     return (
         <div className='card'>
             <div className='author'>

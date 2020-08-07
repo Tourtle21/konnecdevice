@@ -33,7 +33,6 @@ module.exports = {
     getIdea: async (req, res) => {
         const db = req.app.get('db');
         const {id} = req.params;
-        console.log(id);
         const idea = await db.ideas.get_idea(id);
         res.status(200).send(idea[0]);
     },
@@ -91,7 +90,6 @@ module.exports = {
         const db = req.app.get('db');
         const {id} = req.params;
         const {plan} = req.body;
-        console.log(plan);
         const updated = await db.ideas.edit_plan({id, plan});
 
         res.sendStatus(200);

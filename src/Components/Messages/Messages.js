@@ -22,7 +22,6 @@ const Messages = (props) => {
     }
 
     const acceptRequest = (id) => {
-        console.log(id);
         axios.put(`/api/messages/requests/${id}`)
         .then(res => {
             props.deleteRequest(id);

@@ -529,7 +529,7 @@ main {
   width: 100%;
   overflow-y: scroll;
   padding: 20px;
-  @include flex(center, flex-start);
+  @include flex(space-around, flex-start);
   flex-wrap: wrap;
   .task {
     height: 100%;

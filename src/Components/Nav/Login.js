@@ -35,7 +35,6 @@ const Login = (props) => {
 
     const {loginType, loginFn, signupFn, exitFn, sendEmailFn, confirmation} = props;
     useEffect(() => {
-        console.log("DELETED")
         if (loginType !== 'confirmation') {
             setUsername('');
             setPassword('');
@@ -59,7 +58,6 @@ const Login = (props) => {
             signupFn(username, password, displayName, description, file);
         }
     }
-    console.log(error);
     return (
         <div onKeyDown={(e) => e.key === 'Enter' ? handleSubmit() : null } onMouseDown={(e) => exitFn(e)} className='login'>
             <div className='login-box'>
