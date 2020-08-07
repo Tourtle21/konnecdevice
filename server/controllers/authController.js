@@ -69,8 +69,8 @@ module.exports = {
             <span>Your confirmation code is: <b>${req.body.number}</b></span>
             `, // html body
             });
-            return res.sendStatus(200);
         }
+        res.sendStatus(200);
         
         main().catch(console.error);
     },

@@ -1,6 +1,6 @@
 insert into users (
-    username, password, description, display_name, profile_img, plan
+    username, password, description, display_name, profile_img
 ) values (
-    ${username}, ${hash}, ${description}, ${displayName}, ${file}, ''
+    ${username}, ${hash}, ${description}, ${displayName}, ${file}
 )
 returning *;
