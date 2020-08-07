@@ -35,6 +35,7 @@ const Nav = (props) => {
     }, [])
 
     const handleLogin = (username, password) => {
+        console.log("HI2")
         setError('');
         axios.post('/auth/login', {username, password})
         .then(res => {
@@ -46,12 +47,19 @@ const Nav = (props) => {
     }
     console.log(confirmation);
     const sendEmail = (username) => {
-        setLogin('confirmation');
+        console.log(error);
         const randomNumber = Math.round(Math.random() * (99999 - 10000) + 10000);
         console.log(randomNumber);
-        setConfirmation(randomNumber);
-        axios.post('/auth/email', {number: randomNumber, email:username});
+        axios.post('/auth/email', {number: randomNumber, email:username})
+        .then(() => {
+            setConfirmation(randomNumber);
+            setLogin('confirmation');
+        }).catch(() => {
+            console.log("HI")
+            setError('Invalid Email');
+        })
     }
+    console.log(error);
 
     const handleSignup = (username, password, displayName, description, file) => {
         axios.post('/auth/register', {username, password, displayName, description, file})

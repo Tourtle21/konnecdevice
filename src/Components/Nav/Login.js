@@ -34,8 +34,8 @@ const Login = (props) => {
     )
 
     const {loginType, loginFn, signupFn, exitFn, sendEmailFn, confirmation} = props;
-    
     useEffect(() => {
+        console.log("DELETED")
         if (loginType !== 'confirmation') {
             setUsername('');
             setPassword('');
@@ -59,14 +59,14 @@ const Login = (props) => {
             signupFn(username, password, displayName, description, file);
         }
     }
-
+    console.log(error);
     return (
         <div onKeyDown={(e) => e.key === 'Enter' ? handleSubmit() : null } onMouseDown={(e) => exitFn(e)} className='login'>
             <div className='login-box'>
                 {loginType !== 'confirmation' ? <>
                 <h1>{loginType}</h1>
                 <div className='info'>
-                    <span className='error-message'>{error}{error}</span>
+                    <span className='error-message'>{error}{props.error}</span>
                     <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Email" />
                     <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     {loginType === "signup" ? <><input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder="Display Name" />

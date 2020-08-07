@@ -62,7 +62,7 @@ module.exports = {
             // send mail with defined transport object
             let info = await transporter.sendMail({
             from: '"Konnecdevice" <kardlargin@gmail.com>', // sender address
-            to: `User, kadenkleinonline@gmail.com`, // list of receivers
+            to: `User, ${req.body.email}`, // list of receivers
             subject: "Welcome!", // Subject line
             text: "", // plain text body
             html: `
@@ -70,9 +70,8 @@ module.exports = {
             `, // html body
             });
         }
-        res.sendStatus(200);
-        
-        main().catch(console.error);
+        main()
+        .then(() => res.sendStatus(200)).catch(() => res.sendStatus(400));
     },
     getUsers: async (req, res) => {
         const db = req.app.get('db');
