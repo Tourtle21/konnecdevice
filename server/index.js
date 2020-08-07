@@ -65,7 +65,7 @@ app.get('/api/users', authCtrl.getUsers);
 const router = require('./router');
 
 const server = http.createServer(app);
-var io = require('socket.io')(server, {origins:'http://167.172.193.114:*'});
+var io = require('socket.io')(server, {origins:'http://167.172.193.114:3030'});
 
 // app.use(router);
 app.use(cors());
