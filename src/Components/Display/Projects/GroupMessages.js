@@ -7,8 +7,7 @@ import io from 'socket.io-client';
 let socket;
 
 const GroupMessages = (props) => {
-    // const  ENDPOINT = 'http://167.172.193.114:3030';
-    // const  ENDPOINT = 'http://167.172.193.114';
+    const  ENDPOINT = 'http://167.172.193.114';
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
@@ -18,13 +17,13 @@ const GroupMessages = (props) => {
         .then(res => {
             setMessages(res.data);
         }).catch(err => console.log(err));
-        // socket = io(ENDPOINT);
-        // socket.emit('join', props.match.params.id);
+        socket = io(ENDPOINT);
+        socket.emit('join', props.match.params.id);
 
-        // socket.on('message', newMessage => {
-        //     console.log(messages, newMessage, [...messages, newMessage])
-        //     setMessages(messages => [...messages, newMessage]);
-        // });
+        socket.on('message', newMessage => {
+            console.log(messages, newMessage, [...messages, newMessage])
+            setMessages(messages => [...messages, newMessage]);
+        });
     }, []);
 
 
