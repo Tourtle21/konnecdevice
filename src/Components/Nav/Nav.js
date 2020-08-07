@@ -44,7 +44,7 @@ const Nav = (props) => {
             setError(err.response.data);
         })
     }
-
+    console.log(confirmation);
     const sendEmail = (username) => {
         setLogin('confirmation');
         const randomNumber = Math.round(Math.random() * (99999 - 10000) + 10000);

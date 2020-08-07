@@ -69,10 +69,10 @@ module.exports = {
             <span>Your confirmation code is: <b>${req.body.number}</b></span>
             `, // html body
             });
+            return res.sendStatus(200);
         }
         
         main().catch(console.error);
-        res.sendStatus(200);
     },
     getUsers: async (req, res) => {
         const db = req.app.get('db');
