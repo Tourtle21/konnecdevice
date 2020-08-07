@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 let socket;
 
 const GroupMessages = (props) => {
-    const  ENDPOINT = 'https://167.172.193.114:3030';
+    const  ENDPOINT = 'https://konnecdevice.com';
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
