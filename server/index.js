@@ -67,7 +67,7 @@ const router = require('./router');
 const server = http.createServer(app);
 var io = require('socket.io')(server, {origins:'http://167.172.193.114:*'});
 
-app.use(router);
+// app.use(router);
 app.use(cors());
 
 io.on('connection', (socket) => {
