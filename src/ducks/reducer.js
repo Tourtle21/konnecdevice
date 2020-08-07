@@ -46,11 +46,11 @@ export default function reducer(state=initialState, action) {
             return {...state, requests: payload};
         case DELETE_REQUEST:
             let newRequests = state.requests.slice();
-            const index = newRequests.find(request => request.id === payload);
+            const index = newRequests.findIndex(request => request.id === payload);
             newRequests.splice(index, 1);
             return {...state, requests: newRequests}
         case LOGOUT_USER:
-            return {};
+            return {username: '', requests: []};
         default:
             return state;
     }

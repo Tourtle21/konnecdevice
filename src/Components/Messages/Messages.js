@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {updateRequests, deleteRequest} from '../../ducks/reducer';
 import axios from 'axios';
@@ -6,11 +6,13 @@ import axios from 'axios';
 const Messages = (props) => {
 
     useEffect(() => {
-        axios.get('/api/messages/all')
-        .then(res => {
-            props.updateRequests(res.data);
-        })
-    }, [])
+        if (props.display_name) {
+            axios.get('/api/messages/all')
+            .then(res => {
+                props.updateRequests(res.data);
+            })
+        }
+    }, [props.username])
 
     const cancelRequest = (id) => {
         axios.delete(`/api/messages/requests/${id}`)
@@ -19,7 +21,17 @@ const Messages = (props) => {
         })
     }
 
-    const mappedRequests = props.requests.map(request => (request.request_id === props.id ? <div>You requested to {request.display_name} to collaborate on {request.title} <button onClick={() => cancelRequest(request.id)}>X</button></div> : <div>{request.display_name}<br />{request.title}<br /><button onClick={() => cancelRequest(request.id)}>X</button><button>√</button></div>))
+    const acceptRequest = (id) => {
+        console.log(id);
+        axios.put(`/api/messages/requests/${id}`)
+        .then(res => {
+            props.deleteRequest(id);
+        })
+    }
+    const mappedRequests = props.requests.map(request => 
+        (request.request_id === props.id ?
+        <div>You requested to {request.display_name} to collaborate on {request.title} <button onClick={() => cancelRequest(request.id)}>X</button></div> : 
+        <div>{request.display_name}<br />{request.title}<br /><button onClick={() => cancelRequest(request.id)}>X</button><button onClick={() => acceptRequest(request.id)}>√</button></div>))
 
     return (
         <section className='messages'>

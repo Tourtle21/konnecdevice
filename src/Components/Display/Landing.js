@@ -11,6 +11,7 @@ const Landing = (props) => {
 
     const {myIdeas} = props.routeReducer;
 
+
     useEffect(() => {
         if (creating) {
             deleteCreateIdea();
@@ -56,7 +57,6 @@ const Landing = (props) => {
     const createNewIdea = () => {
         if (!creating) {
             let newIdeas = ideas.slice();
-            console.log(props)
             newIdeas.push({title:'', description:'', id:0, editing:true, display_name:props.reducer.display_name, user_id:props.reducer.id});
             setSelected(0);
             setCreating(true);
@@ -82,11 +82,11 @@ const Landing = (props) => {
         axios.post('/api/ideas', body)
         .then(res => {
             resetIdeas(res.data);
+            setCreating(false);
         })
     }
 
     const mappedIdeas = myIdeas ? ideas.filter(idea => (idea.user_id === props.reducer.id)).map((idea, i) => (<Idea key={i} createIdeaFn={createIdea} changeSelectedFn={setSelected} deleteCreateIdeaFn={deleteCreateIdea} deleteIdeaFn={deleteIdea} editIdeaFn={editIdea} selected={selected} idea={idea} myIdea={true} />)) : ideas.map((idea, i) => (<Idea key={i} createIdeaFn={createIdea} changeSelectedFn={setSelected} deleteCreateIdeaFn={deleteCreateIdea} deleteIdeaFn={deleteIdea} editIdeaFn={editIdea} selected={selected} idea={idea} />));
-    console.log(ideas);
     return (
         <main>
             <nav><input onChange={(e) => updateIdeas(e.target.value)} placeholder="Filter" />{myIdeas ? <button onClick={createNewIdea} className='create-new'>CREATE NEW</button> : null}</nav>

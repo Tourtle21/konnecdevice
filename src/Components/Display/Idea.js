@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Profile from '../../assets/profile.JPG';
-import EditIdea from './EditIdea';
 import {connect} from 'react-redux';
 import {changeBool} from '../../ducks/routeReducer';
 import {updateRequests} from '../../ducks/reducer';
 import axios from 'axios';
 
 const Idea = (props) => {
-    const {id, title, display_name, description, img, is_live, user_id} = props.idea;
+    const {id, title, display_name, description, img, is_live, user_id, profile_img} = props.idea;
     const {myIdea, changeSelectedFn, selected, deleteIdeaFn, editIdeaFn, deleteCreateIdeaFn, createIdeaFn} = props;
 
     const [editing, setEditing] = useState(false);
@@ -30,10 +29,11 @@ const Idea = (props) => {
         changeSelectedFn(0);
     }
 
-
+    console.log(description.includes('\n'));
     const sendRequest = (e) => {
-        axios.post('/api/messages/requests', {id, recepient_id: user_id})
+        axios.post('/api/messages/requests', {id, recepient_id: user_id, user_request: false})
         .then(res => {
+            console.log(res.data);
             props.updateRequests(res.data);
         })
     }
@@ -41,7 +41,7 @@ const Idea = (props) => {
     <input onChange={(e) => setNewTitle(e.target.value)} className='title-input' value={newTitle} />
     <div className='author'>
         <h3>{display_name ? display_name : props.display_name}</h3>
-        <img className='mini-profile' src={Profile} />
+        <div className='mini-profile' style={{backgroundImage: `url(${props.profile_img})`}}></div>
     </div>
     <textarea className='description-input' onChange={(e) => setNewDescription(e.target.value)} value={newDescription} style={myIdea ? {width:"80%"} : {width:"100%"}}></textarea>
 
@@ -66,7 +66,7 @@ const Idea = (props) => {
             <h1>{title}</h1>
             <div className='author'>
                 <h3>{display_name ? display_name : props.display_name}</h3>
-                <img className='mini-profile' src={Profile} />
+                <div className='mini-profile' style={{backgroundImage: `url(${profile_img ? profile_img : props.profile_img})`}}></div>
             </div>
             <p style={myIdea ? {width:"80%"} : {width:"100%"}}>{description}</p>
 

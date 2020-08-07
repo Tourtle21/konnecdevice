@@ -1,0 +1,1 @@
+select u.display_name, u.profile_img, u.id from users u;

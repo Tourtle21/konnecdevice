@@ -7,6 +7,29 @@ $color6: rgb(198, 198, 198);
 $headerHeight: 70px;
 $windowHeight: calc(100vh - 70px);
 
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin input($color, $height) {
+  height: $height;
+  color: $color;
+  background: transparent;
+  border: 1px solid $color6;
+  font-size: 1.5em;
+}
+
+@mixin profile($size) {
+  height: $size;
+  width: $size;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 1px black;
+}
+
 .app {
   background-color: $color5;
 }
@@ -16,9 +39,7 @@ $windowHeight: calc(100vh - 70px);
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.473);
   position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  @include flex(center, flex-start);
   .login-box {
     box-sizing: border-box;
     margin-top: 30px;
@@ -32,6 +53,30 @@ $windowHeight: calc(100vh - 70px);
     font-size: 4vw;
     text-transform: capitalize;
     border-bottom: 5px solid rgba(20, 20, 20, 0.418);
+  }
+  .drop-box {
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    align-self: center;
+    margin-bottom: 2px;
+    cursor: pointer;
+    &:hover {
+      border: 2px solid orange;
+      .add-profile {
+        height: 96px;
+        width: 96px;
+      }
+    }
+  }
+  .instructions {
+    align-self: center;
+    margin-bottom:20px;
+  }
+  .add-profile {
+    @include profile(100px);
   }
   .info {
     box-sizing: border-box;
@@ -76,9 +121,7 @@ $windowHeight: calc(100vh - 70px);
     width: 100%;
     height: 100%;
     margin-right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex(space-between, center);
   }
   a {
     height: 100%;
@@ -96,9 +139,8 @@ $windowHeight: calc(100vh - 70px);
     max-width: 600px;
   }
   nav ul{
-    display: flex;
+    @include flex(space-between, flex-start);
     width: 100%;
-    justify-content: space-between;
     height: 100%;
   }
   nav a {
@@ -106,8 +148,7 @@ $windowHeight: calc(100vh - 70px);
     text-align: center;
     width: 40%;
     height: 100%;
-    display: flex;
-    align-items: flex-end;
+    @include flex(flex-start, flex-end);
     padding-bottom: 10px;
     margin-right: 10px;
     border-bottom: 5px solid transparent;
@@ -124,10 +165,9 @@ $windowHeight: calc(100vh - 70px);
     width: 100%;    
   }
   .profile {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    box-shadow: 1px 1px 5px 1px black;
+    @include profile(50px);
+    margin-right: 20px;
+    cursor: pointer;
   }
   .profile-menu {
     position: absolute;
@@ -151,8 +191,7 @@ $windowHeight: calc(100vh - 70px);
     li {
       box-sizing: border-box;
       height: 25px;
-      display: flex;
-      align-items: center;
+      @include flex(flex-start, center);
       padding: 5px;
       &:hover {
         background: lightgrey;
@@ -164,13 +203,10 @@ $windowHeight: calc(100vh - 70px);
     width: 90%;
     height: 100%;
     margin-right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    @include flex(flex-end, center);
   }
   .sign-in {
-    display: flex;
-    align-items: center;
+    @include flex(flex-start, center);
     width: 140px;
   }
   .sign-in button{
@@ -197,9 +233,8 @@ $windowHeight: calc(100vh - 70px);
   background-color: $color6;
   box-shadow: 2px 7px 8px 2px black;
   min-width: 120px;
-  display: flex;
+  @include flex(space-between, flex-start);
   flex-direction: column;
-  justify-content: space-between;
   .profile-display {
     box-sizing: border-box;
     padding: 5px;
@@ -217,6 +252,7 @@ $windowHeight: calc(100vh - 70px);
   }
   .message-section {
     height: calc(30vh - 16px);
+    width: 100%;
     border-bottom: 2px solid rgba(0, 0, 0, 0.445);
   }
 }
@@ -237,9 +273,8 @@ main {
   box-sizing: border-box;
   height: $windowHeight;
   width: 85vw;
-  display: flex;
+  @include flex(flex-start, center);
   flex-direction: column;
-  align-items: center;
   padding-top: 20px;
   overflow: scroll;
   input {
@@ -260,21 +295,20 @@ main {
 
 .card {
   box-sizing: border-box;
-  min-height: calc(10vw + 100px);
   width: 80%;
   background: rgba(0, 0, 0, 0.247);
   border: 2px solid grey;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
+  @include flex(space-between, flex-start);
   flex-wrap: wrap;
   transition: 0.5s;
   h1 {
     font-weight: bold;
     color: $color3;
     font-size: 1.5em;
+    width: 60%;
   }
   .author {
     display: flex;
@@ -282,11 +316,9 @@ main {
     align-items: center;
     color:$color3;
     font-weight: bold;
+    margin-bottom: 20px;
     .mini-profile {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      box-shadow: 1px 1px 5px 1px black;
+      @include profile(20px);
       margin-left: 10px;
     }
   }
@@ -294,6 +326,7 @@ main {
     width: 100%;
     color: $color2;
     font-size: 1.5em;
+    margin-bottom: 20px;
   }
   span {
     color: $color3;
@@ -321,17 +354,258 @@ main {
     outline: none;
   }
   .title-input {
-    height: 25px;
-    color: $color3;
-    background: transparent;
-    border: 1px solid $color6;
-    font-size: 1.5em;
+    @include input($color3, 25px);
   }
   .description-input {
-    height: 40%;
-    color: $color2;
+    @include input($color2, 40%);
+  }
+}
+
+.project-main {
+  @include flex(space-around, flex-start);
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  box-sizing: border-box;
+  min-height: 30vw;
+  width: 30vw;
+  background: rgba(0, 0, 0, 0.247);
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  @include flex(center, flex-start);
+  flex-wrap: wrap;
+  transition: 0s;
+  color: $color3;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.expand-project {
+  height: calc(100vh - 100px);
+  width: 80vw;
+  transition: 0.5s;
+  @include flex(flex-start, center);
+  flex-direction: column;
+  cursor: default;
+  nav {
+    width: 100%;
+    height: 30px;
+    background-color: $color5;
+    border-radius: 10px 10px 0 0;
+    ul {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+    a {
+      @include flex(center, center);
+      background-color: rgba(63, 63, 63, 0.548);
+      border-right: 2px solid $color5;
+      text-decoration: none;
+      color: white;
+      height: 100%;
+      width: 10%;
+      font-size: 0.7em;
+    }
+    a:nth-child(1) {
+      border-top-left-radius: 10px;
+    }
+  }
+}
+
+.closed {
+  overflow: hidden;
+}
+.group-messages {
+  @include flex(space-between, center);
+  height: calc(100% - 60px);
+  width: 100%;
+  flex-direction: column;
+  .message-list {
+    height: 90%;
+    width: 100%;
+  }
+  .group-message-submit {
+    width: 100%;
+    @include flex(center, center);
+    padding-bottom: 5px;
+  }
+  .group-message-input {
+    box-sizing: border-box;
+    height: 40px;
     background: transparent;
-    border: 1px solid $color6;
-    font-size: 1.5em;
+    border: none;
+    outline: none;
+    width: 80%;
+    margin: 0;
+    background: rgb(85, 85, 85);
+    border-radius: 6px;
+    color: rgb(228, 228, 228);
+    font-size: 1em;
+    padding: 3px;
+    display: inline-block;
+  }
+  .group-message-button {
+    height: 40px;
+    width: 10%;
+    background: rgb(85, 85, 85);
+    display: inline-block;
+  }
+  .message {
+    box-sizing: border-box;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    font-size: 0.8em;
+    &:hover {
+      background-color: rgb(85, 85, 85);
+    }
+    @include flex(flex-start, flex-start);
+    .mini-profile {
+      @include profile(40px);
+      margin-right: 10px;
+    }
+    h1 {
+      font-weight: bold;
+    }
+    .text {
+      width: calc(100% - 50px);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .my-message {
+    flex-direction: row-reverse;
+    .text {
+      align-items: flex-end;
+    }
+    .mini-profile {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+.connect-name {
+  font-weight: bold;
+  font-size: 1.8em;
+}
+.connect-profile {
+  @include profile(30px);
+  margin-left: 10px;
+}
+.connect-ideas {
+  @include flex(space-around, center);
+  flex-wrap: wrap;
+  width: 100%;
+}
+.connect-idea {
+  height: 100px;
+  width: 22%;
+  color: white;
+  background-color: grey;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  @include flex(center, center);
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(94, 94, 94);
+  }
+}
+
+.tasks {
+  box-sizing: border-box;
+  height: calc(100% - 60px);
+  width: 100%;
+  overflow-y: scroll;
+  padding: 20px;
+  @include flex(space-between, flex-start);
+  flex-wrap: wrap;
+  .task {
+    height: 100%;
+    width: 45%;
+    background-color: grey;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+  }
+  .task-title {
+    text-align: center;
+    color: $color4;
+    border-bottom: 2px solid black;
+  }
+  .complete {
+    background-color: $color1;
+    &:hover {
+      background-color: #0f7aac;
+    }
+  }
+  li {
+    padding: 5px;
+    position: relative;
+    background-color: $color5;
+    border-bottom: 2px solid black;
+    @include flex(flex-start, center);
+    color: white;
+    &:hover {
+      background-color: rgb(54, 54, 54);
+    }
+    input {
+      margin: 0;
+      margin-right: 10px;
+      height: 20px;
+      width: 20px;
+    }
+    button {
+      height: 20px;
+      width: 20px;
+      margin: 0;
+      margin-right: 10px;
+    }
+    .task-delete {
+      background-color: rgb(228, 68, 68);
+      position: absolute;
+      right: 0;
+    }
+    .edit-task-input {
+      @include input(white, 20px);
+      width: 90%;
+      font-size: 1em;
+    }
+  }
+}
+.plan {
+  height: calc(100% - 60px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  textarea {
+    resize: none;
+
+    @include input($color2, 100px);
+    width: 100%;
+    outline: none;
+    font-size: 0.8em;
+  }
+  .planning-container {
+    box-sizing: border-box;
+    height: calc(100% - 20px);
+    width: 100%;
+    overflow-y: scroll;
+    padding: 20px;
+  }
+  .plan-description {
+    color: $color2;
+    font-size: 0.8em;
   }
 }
