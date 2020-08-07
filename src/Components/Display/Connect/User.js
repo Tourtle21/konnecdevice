@@ -8,7 +8,7 @@ import {updateRequests} from '../../../ducks/reducer';
 const User = (props) => {
     const [myIdeas, setMyIdeas] = useState([]);
 
-    const {id, display_name, profile_img, description, } = props.user;
+    const {id, display_name, profile_img, description } = props.user;
 
     const openRequests = () => {
         axios.get('/api/myIdeas')
@@ -26,7 +26,7 @@ const User = (props) => {
     }
 
     const mappedIdeas = myIdeas.filter(idea => idea.is_live).map(idea => (<div onClick={() => sendRequest(idea.id)} className='connect-idea'>{idea.title}</div>))
-
+    console.log(description)
     return (
         <div className='card'>
             <div className='author'>
