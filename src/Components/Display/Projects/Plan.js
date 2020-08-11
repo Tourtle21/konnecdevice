@@ -25,7 +25,7 @@ const Plan = (props) => {
     const savePlan = () => {
         axios.put(`/api/ideas/plan/${props.match.params.id}`, {plan:JSON.stringify(fullPlan)})
         .then(res => {
-           
+           console.log('Saved');
         })
     }
 
