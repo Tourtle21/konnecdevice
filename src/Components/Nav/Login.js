@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useDropzone} from 'react-dropzone';
 import ReactS3 from 'react-s3';
+import axios from 'axios';
+
 
 const Login = (props) => {
     const [username, setUsername] = useState('');
@@ -12,21 +14,14 @@ const Login = (props) => {
 
     const [file, setFile] = useState('https://konnecdevice.s3.amazonaws.com/download.png');
 
-    const config = {
-        bucketName: 'konnecdevice',
-        albumName: 'photos',
-        region: 'us-west-1',
-        accessKeyId: 'AKIAJLRJDH72QU62UUAA',
-        secretAccessKey: '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'
-    }
-
     const {getRootProps, getInputProps} = useDropzone({
         accept: "image/*",
         onDrop: (acceptedFiles) => {
-            ReactS3.uploadFile(acceptedFiles[0], config)
-            .then( data =>
-                setFile(data.location)
-            ).catch( err => alert(err))
+            axios.get('/api/users/image', acceptedFiles[0]).then(res => {
+                ReactS3.uploadFile(acceptedFiles[0], res.data).then( data => {
+                    setFile(data.location);
+                })
+            })
         }
     })
     const image = (

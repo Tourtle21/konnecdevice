@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 module.exports = {
     getIdeas: async (req, res) => {
@@ -93,5 +94,16 @@ module.exports = {
         const updated = await db.ideas.edit_plan({id, plan});
 
         res.sendStatus(200);
+    },
+    profileImg: (req, res) => {
+        const config = {
+            bucketName: 'konnecdevice',
+            albumName: 'photos',
+            region: 'us-west-1',
+            accessKeyId: process.env.AWSAccessKeyId,
+            secretAccessKey: process.env.AWSSecretKey
+        }
+        return res.status(200).send(config);
+        
     }
 }

@@ -40,6 +40,7 @@ app.get('/auth/isAdmin/:id', authCtrl.isAdmin);
 
 app.get('/api/ideas', ideaCtrl.getIdeas);
 app.get('/api/myIdeas', checkLoggedInCtrl.checkLoggedIn, ideaCtrl.getMyIdeas);
+app.get('/api/users/image', ideaCtrl.profileImg);
 app.get('/api/ideas/projects', checkLoggedInCtrl.checkLoggedIn, ideaCtrl.getProjects);
 app.get('/api/ideas/:id', checkLoggedInCtrl.checkCorrectUser, ideaCtrl.getIdea);
 app.get('/api/ideas/collaborators/:id', checkLoggedInCtrl.checkCorrectUser, ideaCtrl.getCollaborators);
@@ -48,6 +49,7 @@ app.put('/api/ideas/live/:id', ideaCtrl.toggleLive);
 app.put('/api/ideas/:id', ideaCtrl.editIdea);
 app.put('/api/ideas/plan/:id', ideaCtrl.editPlan);
 app.delete('/api/ideas/:id', ideaCtrl.deleteIdea);
+
 
 app.get('/api/messages/all', checkLoggedInCtrl.checkLoggedIn, messagesCtrl.getRequests);
 app.get('/api/messages/:id', checkLoggedInCtrl.checkCorrectUser, messagesCtrl.getMessages);
